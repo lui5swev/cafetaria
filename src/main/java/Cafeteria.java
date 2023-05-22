@@ -6,6 +6,8 @@ public class Cafeteria {
     private String redesSociales;
     private ArrayList<Cafe> listaDeCafes = new ArrayList<>();
 
+    private ArrayList<Alfajor> listaDeAlfajores = new ArrayList<>();
+
     public Cafeteria(String nombre, String direccion, String redesSociales){
         this.nombre = nombre;
         this.direccion = direccion;
@@ -64,6 +66,13 @@ public class Cafeteria {
                 System.out.println(element.toString());
             }
         }
+    }
+    public void agregarAlfajor(String sabor, String tamano) {
+        Alfajor alfajor0 = new Alfajor(sabor, tamano);
+        this.listaDeAlfajores.add(alfajor0);
+    }
+    public void borrarAlfajor(int i){
+        listaDeAlfajores.remove(i-1);
     }
 
 }

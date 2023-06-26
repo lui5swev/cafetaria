@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 
 public class Cafeteria {
@@ -5,15 +6,12 @@ public class Cafeteria {
     private String direccion;
     private String redesSociales;
     private ArrayList<Cafe> listaDeCafes = new ArrayList<>();
-
     private ArrayList<Alfajor> listaDeAlfajores = new ArrayList<>();
-
     public Cafeteria(String nombre, String direccion, String redesSociales){
         this.nombre = nombre;
         this.direccion = direccion;
         this.redesSociales = redesSociales;
     }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -42,7 +40,6 @@ public class Cafeteria {
         Cafe cafe0 = new Cafe(gramos, agua, tamano);
         this.listaDeCafes.add(cafe0);
     }
-
     public void mostrarCafes(){
         if (this.listaDeCafes.isEmpty()){
             System.out.println("Lista de cafes esta vacia");
@@ -55,11 +52,9 @@ public class Cafeteria {
             }
         }
     }
-
     public void borrarCafe(int i){
         listaDeCafes.remove(i-1);
     }
-
     public void buscarCafePorTamano(String tamano){
         for (Cafe element: listaDeCafes){
             if(element.getTamano() == tamano){
@@ -75,4 +70,42 @@ public class Cafeteria {
         listaDeAlfajores.remove(i-1);
     }
 
+    private static void writeLine(BufferedWriter writer, String[] data) throws IOException {
+        for (int i = 0; i < data.length; i++) {
+            if (i != 0) {
+                writer.write(",");
+            }
+            writer.write(data[i]);
+        }
+        writer.newLine();
+    }
+    public void anadirCompraALibro(Cafe cafe) {
+        String filePath = "C:\\Users\\Luis\\IdeaProjects\\trabajoCafeteria\\src\\main\\java\\libroVentas.csv";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            String[] content = new String[]{cafe.toString()};
+            writeLine(writer, content);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void comprarCafe(Double gramos, Double agua, String tamano){
+        Cafe cafe0 = new Cafe(gramos, agua, tamano);
+        anadirCompraALibro(cafe0);
+        System.out.println("SU COMPRA: "+cafe0.toString());
+    }
+
+    public void mostrarLibroVentas(){
+        String filePath = "C:\\Users\\Luis\\IdeaProjects\\trabajoCafeteria\\src\\main\\java\\libroVentas.csv";
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            System.out.println("-------------------------------");
+            System.out.println("LIBRO DE VENTAS");
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

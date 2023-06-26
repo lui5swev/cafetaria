@@ -1,8 +1,6 @@
-
-
 public class main {
     public static void main(String[] args) {
-        Cafeteria cafeteria1 = new Cafeteria("Puzzles","arturo prat 22", "@puzzles");
+        Cafeteria cafeteria1 = new Cafeteria("Puzzles", "arturo prat 22", "@puzzles");
 
         cafeteria1.mostrarCafes();
 
@@ -21,13 +19,15 @@ public class main {
 
         cafeteria1.buscarCafePorTamano("grande");
 
+        cafeteria1.comprarCafe(8.5, 4.5, "mediano");
+        cafeteria1.comprarCafe(6.1, 10.4, "pequeno");
+        cafeteria1.comprarCafe(8.0, 3.4, "grande");
+        cafeteria1.comprarCafe(2.4, 7.43, "mediano");
 
+        cafeteria1.mostrarLibroVentas();
 
 
 
     }
-
-
-
 
 }
